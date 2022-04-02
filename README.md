@@ -1,3 +1,3 @@
-# Strapi application
+# MyFencingNft marketplace backend panel
 
-A quick description of your strapi application
+MyFencingNft marketplace backend panel source code
