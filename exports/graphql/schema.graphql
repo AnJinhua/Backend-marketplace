@@ -1,0 +1,2312 @@
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UserPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type AuthorSales {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  sales: Float!
+  volume: Float!
+  daily_sales: Float!
+  weekly_sales: Float!
+  floor_price: Float!
+  owners: Float!
+  assets: Float!
+  published_at: DateTime
+}
+
+type AuthorSalesConnection {
+  values: [AuthorSales]
+  groupBy: AuthorSalesGroupBy
+  aggregate: AuthorSalesAggregator
+}
+
+type AuthorSalesAggregator {
+  count: Int
+  totalCount: Int
+  sum: AuthorSalesAggregatorSum
+  avg: AuthorSalesAggregatorAvg
+  min: AuthorSalesAggregatorMin
+  max: AuthorSalesAggregatorMax
+}
+
+type AuthorSalesAggregatorSum {
+  sales: Float
+  volume: Float
+  daily_sales: Float
+  weekly_sales: Float
+  floor_price: Float
+  owners: Float
+  assets: Float
+}
+
+type AuthorSalesAggregatorAvg {
+  sales: Float
+  volume: Float
+  daily_sales: Float
+  weekly_sales: Float
+  floor_price: Float
+  owners: Float
+  assets: Float
+}
+
+type AuthorSalesAggregatorMin {
+  sales: Float
+  volume: Float
+  daily_sales: Float
+  weekly_sales: Float
+  floor_price: Float
+  owners: Float
+  assets: Float
+}
+
+type AuthorSalesAggregatorMax {
+  sales: Float
+  volume: Float
+  daily_sales: Float
+  weekly_sales: Float
+  floor_price: Float
+  owners: Float
+  assets: Float
+}
+
+type AuthorSalesGroupBy {
+  id: [AuthorSalesConnectionId]
+  created_at: [AuthorSalesConnectionCreated_at]
+  updated_at: [AuthorSalesConnectionUpdated_at]
+  sales: [AuthorSalesConnectionSales]
+  volume: [AuthorSalesConnectionVolume]
+  daily_sales: [AuthorSalesConnectionDaily_sales]
+  weekly_sales: [AuthorSalesConnectionWeekly_sales]
+  floor_price: [AuthorSalesConnectionFloor_price]
+  owners: [AuthorSalesConnectionOwners]
+  assets: [AuthorSalesConnectionAssets]
+  published_at: [AuthorSalesConnectionPublished_at]
+}
+
+type AuthorSalesConnectionId {
+  key: ID
+  connection: AuthorSalesConnection
+}
+
+type AuthorSalesConnectionCreated_at {
+  key: DateTime
+  connection: AuthorSalesConnection
+}
+
+type AuthorSalesConnectionUpdated_at {
+  key: DateTime
+  connection: AuthorSalesConnection
+}
+
+type AuthorSalesConnectionSales {
+  key: Float
+  connection: AuthorSalesConnection
+}
+
+type AuthorSalesConnectionVolume {
+  key: Float
+  connection: AuthorSalesConnection
+}
+
+type AuthorSalesConnectionDaily_sales {
+  key: Float
+  connection: AuthorSalesConnection
+}
+
+type AuthorSalesConnectionWeekly_sales {
+  key: Float
+  connection: AuthorSalesConnection
+}
+
+type AuthorSalesConnectionFloor_price {
+  key: Float
+  connection: AuthorSalesConnection
+}
+
+type AuthorSalesConnectionOwners {
+  key: Float
+  connection: AuthorSalesConnection
+}
+
+type AuthorSalesConnectionAssets {
+  key: Float
+  connection: AuthorSalesConnection
+}
+
+type AuthorSalesConnectionPublished_at {
+  key: DateTime
+  connection: AuthorSalesConnection
+}
+
+input AuthorSaleInput {
+  sales: Float!
+  volume: Float!
+  daily_sales: Float!
+  weekly_sales: Float!
+  floor_price: Float!
+  owners: Float!
+  assets: Float!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editAuthorSaleInput {
+  sales: Float
+  volume: Float
+  daily_sales: Float
+  weekly_sales: Float
+  floor_price: Float
+  owners: Float
+  assets: Float
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createAuthorSaleInput {
+  data: AuthorSaleInput
+}
+
+type createAuthorSalePayload {
+  authorSale: AuthorSales
+}
+
+input updateAuthorSaleInput {
+  where: InputID
+  data: editAuthorSaleInput
+}
+
+type updateAuthorSalePayload {
+  authorSale: AuthorSales
+}
+
+input deleteAuthorSaleInput {
+  where: InputID
+}
+
+type deleteAuthorSalePayload {
+  authorSale: AuthorSales
+}
+
+type Author {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  avatar: UploadFile
+  username: String!
+  banner: UploadFile
+  social: String!
+  wallet: String!
+  followers: Int
+  bid: Bid
+  author_sale: AuthorSales
+  about: String
+  users_permissions_user: UsersPermissionsUser
+  published_at: DateTime
+  nfts(sort: String, limit: Int, start: Int, where: JSON): [Nft]
+  hot_collections(sort: String, limit: Int, start: Int, where: JSON): [HotCollection]
+}
+
+type AuthorConnection {
+  values: [Author]
+  groupBy: AuthorGroupBy
+  aggregate: AuthorAggregator
+}
+
+type AuthorAggregator {
+  count: Int
+  totalCount: Int
+  sum: AuthorAggregatorSum
+  avg: AuthorAggregatorAvg
+  min: AuthorAggregatorMin
+  max: AuthorAggregatorMax
+}
+
+type AuthorAggregatorSum {
+  followers: Float
+}
+
+type AuthorAggregatorAvg {
+  followers: Float
+}
+
+type AuthorAggregatorMin {
+  followers: Float
+}
+
+type AuthorAggregatorMax {
+  followers: Float
+}
+
+type AuthorGroupBy {
+  id: [AuthorConnectionId]
+  created_at: [AuthorConnectionCreated_at]
+  updated_at: [AuthorConnectionUpdated_at]
+  avatar: [AuthorConnectionAvatar]
+  username: [AuthorConnectionUsername]
+  banner: [AuthorConnectionBanner]
+  social: [AuthorConnectionSocial]
+  wallet: [AuthorConnectionWallet]
+  followers: [AuthorConnectionFollowers]
+  bid: [AuthorConnectionBid]
+  author_sale: [AuthorConnectionAuthor_sale]
+  about: [AuthorConnectionAbout]
+  users_permissions_user: [AuthorConnectionUsers_permissions_user]
+  published_at: [AuthorConnectionPublished_at]
+}
+
+type AuthorConnectionId {
+  key: ID
+  connection: AuthorConnection
+}
+
+type AuthorConnectionCreated_at {
+  key: DateTime
+  connection: AuthorConnection
+}
+
+type AuthorConnectionUpdated_at {
+  key: DateTime
+  connection: AuthorConnection
+}
+
+type AuthorConnectionAvatar {
+  key: ID
+  connection: AuthorConnection
+}
+
+type AuthorConnectionUsername {
+  key: String
+  connection: AuthorConnection
+}
+
+type AuthorConnectionBanner {
+  key: ID
+  connection: AuthorConnection
+}
+
+type AuthorConnectionSocial {
+  key: String
+  connection: AuthorConnection
+}
+
+type AuthorConnectionWallet {
+  key: String
+  connection: AuthorConnection
+}
+
+type AuthorConnectionFollowers {
+  key: Int
+  connection: AuthorConnection
+}
+
+type AuthorConnectionBid {
+  key: ID
+  connection: AuthorConnection
+}
+
+type AuthorConnectionAuthor_sale {
+  key: ID
+  connection: AuthorConnection
+}
+
+type AuthorConnectionAbout {
+  key: String
+  connection: AuthorConnection
+}
+
+type AuthorConnectionUsers_permissions_user {
+  key: ID
+  connection: AuthorConnection
+}
+
+type AuthorConnectionPublished_at {
+  key: DateTime
+  connection: AuthorConnection
+}
+
+input AuthorInput {
+  avatar: ID
+  username: String!
+  banner: ID
+  social: String!
+  wallet: String!
+  followers: Int
+  bid: ID
+  nfts: [ID]
+  author_sale: ID
+  hot_collections: [ID]
+  about: String
+  users_permissions_user: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editAuthorInput {
+  avatar: ID
+  username: String
+  banner: ID
+  social: String
+  wallet: String
+  followers: Int
+  bid: ID
+  nfts: [ID]
+  author_sale: ID
+  hot_collections: [ID]
+  about: String
+  users_permissions_user: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createAuthorInput {
+  data: AuthorInput
+}
+
+type createAuthorPayload {
+  author: Author
+}
+
+input updateAuthorInput {
+  where: InputID
+  data: editAuthorInput
+}
+
+type updateAuthorPayload {
+  author: Author
+}
+
+input deleteAuthorInput {
+  where: InputID
+}
+
+type deleteAuthorPayload {
+  author: Author
+}
+
+type Bid {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  value: Float
+  nft: Nft
+  author: Author
+  published_at: DateTime
+}
+
+type BidConnection {
+  values: [Bid]
+  groupBy: BidGroupBy
+  aggregate: BidAggregator
+}
+
+type BidAggregator {
+  count: Int
+  totalCount: Int
+  sum: BidAggregatorSum
+  avg: BidAggregatorAvg
+  min: BidAggregatorMin
+  max: BidAggregatorMax
+}
+
+type BidAggregatorSum {
+  value: Float
+}
+
+type BidAggregatorAvg {
+  value: Float
+}
+
+type BidAggregatorMin {
+  value: Float
+}
+
+type BidAggregatorMax {
+  value: Float
+}
+
+type BidGroupBy {
+  id: [BidConnectionId]
+  created_at: [BidConnectionCreated_at]
+  updated_at: [BidConnectionUpdated_at]
+  value: [BidConnectionValue]
+  nft: [BidConnectionNft]
+  author: [BidConnectionAuthor]
+  published_at: [BidConnectionPublished_at]
+}
+
+type BidConnectionId {
+  key: ID
+  connection: BidConnection
+}
+
+type BidConnectionCreated_at {
+  key: DateTime
+  connection: BidConnection
+}
+
+type BidConnectionUpdated_at {
+  key: DateTime
+  connection: BidConnection
+}
+
+type BidConnectionValue {
+  key: Float
+  connection: BidConnection
+}
+
+type BidConnectionNft {
+  key: ID
+  connection: BidConnection
+}
+
+type BidConnectionAuthor {
+  key: ID
+  connection: BidConnection
+}
+
+type BidConnectionPublished_at {
+  key: DateTime
+  connection: BidConnection
+}
+
+input BidInput {
+  value: Float
+  nft: ID
+  author: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editBidInput {
+  value: Float
+  nft: ID
+  author: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createBidInput {
+  data: BidInput
+}
+
+type createBidPayload {
+  bid: Bid
+}
+
+input updateBidInput {
+  where: InputID
+  data: editBidInput
+}
+
+type updateBidPayload {
+  bid: Bid
+}
+
+input deleteBidInput {
+  where: InputID
+}
+
+type deleteBidPayload {
+  bid: Bid
+}
+
+type BlogPost {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String
+  cover: UploadFile
+  content: String
+  post_tag: PostTags
+  author: Author
+  post_comment: PostComments
+  likes: Int
+  published_at: DateTime
+}
+
+type BlogPostConnection {
+  values: [BlogPost]
+  groupBy: BlogPostGroupBy
+  aggregate: BlogPostAggregator
+}
+
+type BlogPostAggregator {
+  count: Int
+  totalCount: Int
+  sum: BlogPostAggregatorSum
+  avg: BlogPostAggregatorAvg
+  min: BlogPostAggregatorMin
+  max: BlogPostAggregatorMax
+}
+
+type BlogPostAggregatorSum {
+  likes: Float
+}
+
+type BlogPostAggregatorAvg {
+  likes: Float
+}
+
+type BlogPostAggregatorMin {
+  likes: Float
+}
+
+type BlogPostAggregatorMax {
+  likes: Float
+}
+
+type BlogPostGroupBy {
+  id: [BlogPostConnectionId]
+  created_at: [BlogPostConnectionCreated_at]
+  updated_at: [BlogPostConnectionUpdated_at]
+  title: [BlogPostConnectionTitle]
+  cover: [BlogPostConnectionCover]
+  content: [BlogPostConnectionContent]
+  post_tag: [BlogPostConnectionPost_tag]
+  author: [BlogPostConnectionAuthor]
+  post_comment: [BlogPostConnectionPost_comment]
+  likes: [BlogPostConnectionLikes]
+  published_at: [BlogPostConnectionPublished_at]
+}
+
+type BlogPostConnectionId {
+  key: ID
+  connection: BlogPostConnection
+}
+
+type BlogPostConnectionCreated_at {
+  key: DateTime
+  connection: BlogPostConnection
+}
+
+type BlogPostConnectionUpdated_at {
+  key: DateTime
+  connection: BlogPostConnection
+}
+
+type BlogPostConnectionTitle {
+  key: String
+  connection: BlogPostConnection
+}
+
+type BlogPostConnectionCover {
+  key: ID
+  connection: BlogPostConnection
+}
+
+type BlogPostConnectionContent {
+  key: String
+  connection: BlogPostConnection
+}
+
+type BlogPostConnectionPost_tag {
+  key: ID
+  connection: BlogPostConnection
+}
+
+type BlogPostConnectionAuthor {
+  key: ID
+  connection: BlogPostConnection
+}
+
+type BlogPostConnectionPost_comment {
+  key: ID
+  connection: BlogPostConnection
+}
+
+type BlogPostConnectionLikes {
+  key: Int
+  connection: BlogPostConnection
+}
+
+type BlogPostConnectionPublished_at {
+  key: DateTime
+  connection: BlogPostConnection
+}
+
+input BlogPostInput {
+  title: String
+  cover: ID
+  content: String
+  post_tag: ID
+  author: ID
+  post_comment: ID
+  likes: Int
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editBlogPostInput {
+  title: String
+  cover: ID
+  content: String
+  post_tag: ID
+  author: ID
+  post_comment: ID
+  likes: Int
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createBlogPostInput {
+  data: BlogPostInput
+}
+
+type createBlogPostPayload {
+  blogPost: BlogPost
+}
+
+input updateBlogPostInput {
+  where: InputID
+  data: editBlogPostInput
+}
+
+type updateBlogPostPayload {
+  blogPost: BlogPost
+}
+
+input deleteBlogPostInput {
+  where: InputID
+}
+
+type deleteBlogPostPayload {
+  blogPost: BlogPost
+}
+
+type Comments {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  text: String
+  author: Author
+  is_reply: Boolean
+  published_at: DateTime
+  replies(sort: String, limit: Int, start: Int, where: JSON): [Comments]
+}
+
+type CommentsConnection {
+  values: [Comments]
+  groupBy: CommentsGroupBy
+  aggregate: CommentsAggregator
+}
+
+type CommentsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CommentsGroupBy {
+  id: [CommentsConnectionId]
+  created_at: [CommentsConnectionCreated_at]
+  updated_at: [CommentsConnectionUpdated_at]
+  text: [CommentsConnectionText]
+  author: [CommentsConnectionAuthor]
+  is_reply: [CommentsConnectionIs_reply]
+  published_at: [CommentsConnectionPublished_at]
+}
+
+type CommentsConnectionId {
+  key: ID
+  connection: CommentsConnection
+}
+
+type CommentsConnectionCreated_at {
+  key: DateTime
+  connection: CommentsConnection
+}
+
+type CommentsConnectionUpdated_at {
+  key: DateTime
+  connection: CommentsConnection
+}
+
+type CommentsConnectionText {
+  key: String
+  connection: CommentsConnection
+}
+
+type CommentsConnectionAuthor {
+  key: ID
+  connection: CommentsConnection
+}
+
+type CommentsConnectionIs_reply {
+  key: Boolean
+  connection: CommentsConnection
+}
+
+type CommentsConnectionPublished_at {
+  key: DateTime
+  connection: CommentsConnection
+}
+
+input CommentInput {
+  text: String
+  replies: [ID]
+  author: ID
+  is_reply: Boolean
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCommentInput {
+  text: String
+  replies: [ID]
+  author: ID
+  is_reply: Boolean
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createCommentInput {
+  data: CommentInput
+}
+
+type createCommentPayload {
+  comment: Comments
+}
+
+input updateCommentInput {
+  where: InputID
+  data: editCommentInput
+}
+
+type updateCommentPayload {
+  comment: Comments
+}
+
+input deleteCommentInput {
+  where: InputID
+}
+
+type deleteCommentPayload {
+  comment: Comments
+}
+
+type ContactForm {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+  email: String
+  phone: String
+  message: String
+  published_at: DateTime
+}
+
+type ContactFormConnection {
+  values: [ContactForm]
+  groupBy: ContactFormGroupBy
+  aggregate: ContactFormAggregator
+}
+
+type ContactFormAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ContactFormGroupBy {
+  id: [ContactFormConnectionId]
+  created_at: [ContactFormConnectionCreated_at]
+  updated_at: [ContactFormConnectionUpdated_at]
+  name: [ContactFormConnectionName]
+  email: [ContactFormConnectionEmail]
+  phone: [ContactFormConnectionPhone]
+  message: [ContactFormConnectionMessage]
+  published_at: [ContactFormConnectionPublished_at]
+}
+
+type ContactFormConnectionId {
+  key: ID
+  connection: ContactFormConnection
+}
+
+type ContactFormConnectionCreated_at {
+  key: DateTime
+  connection: ContactFormConnection
+}
+
+type ContactFormConnectionUpdated_at {
+  key: DateTime
+  connection: ContactFormConnection
+}
+
+type ContactFormConnectionName {
+  key: String
+  connection: ContactFormConnection
+}
+
+type ContactFormConnectionEmail {
+  key: String
+  connection: ContactFormConnection
+}
+
+type ContactFormConnectionPhone {
+  key: String
+  connection: ContactFormConnection
+}
+
+type ContactFormConnectionMessage {
+  key: String
+  connection: ContactFormConnection
+}
+
+type ContactFormConnectionPublished_at {
+  key: DateTime
+  connection: ContactFormConnection
+}
+
+input ContactFormInput {
+  name: String
+  email: String
+  phone: String
+  message: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editContactFormInput {
+  name: String
+  email: String
+  phone: String
+  message: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createContactFormInput {
+  data: ContactFormInput
+}
+
+type createContactFormPayload {
+  contactForm: ContactForm
+}
+
+input updateContactFormInput {
+  where: InputID
+  data: editContactFormInput
+}
+
+type updateContactFormPayload {
+  contactForm: ContactForm
+}
+
+input deleteContactFormInput {
+  where: InputID
+}
+
+type deleteContactFormPayload {
+  contactForm: ContactForm
+}
+
+type HotCollection {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  unique_id: String
+  banner: UploadFile
+  author: Author
+  name: String
+  Description: String
+  published_at: DateTime
+}
+
+type HotCollectionConnection {
+  values: [HotCollection]
+  groupBy: HotCollectionGroupBy
+  aggregate: HotCollectionAggregator
+}
+
+type HotCollectionAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type HotCollectionGroupBy {
+  id: [HotCollectionConnectionId]
+  created_at: [HotCollectionConnectionCreated_at]
+  updated_at: [HotCollectionConnectionUpdated_at]
+  unique_id: [HotCollectionConnectionUnique_id]
+  banner: [HotCollectionConnectionBanner]
+  author: [HotCollectionConnectionAuthor]
+  name: [HotCollectionConnectionName]
+  Description: [HotCollectionConnectionDescription]
+  published_at: [HotCollectionConnectionPublished_at]
+}
+
+type HotCollectionConnectionId {
+  key: ID
+  connection: HotCollectionConnection
+}
+
+type HotCollectionConnectionCreated_at {
+  key: DateTime
+  connection: HotCollectionConnection
+}
+
+type HotCollectionConnectionUpdated_at {
+  key: DateTime
+  connection: HotCollectionConnection
+}
+
+type HotCollectionConnectionUnique_id {
+  key: String
+  connection: HotCollectionConnection
+}
+
+type HotCollectionConnectionBanner {
+  key: ID
+  connection: HotCollectionConnection
+}
+
+type HotCollectionConnectionAuthor {
+  key: ID
+  connection: HotCollectionConnection
+}
+
+type HotCollectionConnectionName {
+  key: String
+  connection: HotCollectionConnection
+}
+
+type HotCollectionConnectionDescription {
+  key: String
+  connection: HotCollectionConnection
+}
+
+type HotCollectionConnectionPublished_at {
+  key: DateTime
+  connection: HotCollectionConnection
+}
+
+input HotCollectionInput {
+  unique_id: String
+  banner: ID
+  author: ID
+  name: String
+  Description: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editHotCollectionInput {
+  unique_id: String
+  banner: ID
+  author: ID
+  name: String
+  Description: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createHotCollectionInput {
+  data: HotCollectionInput
+}
+
+type createHotCollectionPayload {
+  hotCollection: HotCollection
+}
+
+input updateHotCollectionInput {
+  where: InputID
+  data: editHotCollectionInput
+}
+
+type updateHotCollectionPayload {
+  hotCollection: HotCollection
+}
+
+input deleteHotCollectionInput {
+  where: InputID
+}
+
+type deleteHotCollectionPayload {
+  hotCollection: HotCollection
+}
+
+enum ENUM_NFT_CATEGORY {
+  art
+  music
+  domain_names
+  virtual_world
+  trading_cards
+  collectibles
+  sports
+  utility
+}
+
+enum ENUM_NFT_STATUS {
+  buy_now
+  on_auction
+  has_offers
+}
+
+enum ENUM_NFT_ITEM_TYPE {
+  single_items
+  bundles
+}
+
+enum ENUM_NFT_COLLECTIONS {
+  abstraction
+  patternlicious
+  skecthify
+  cartoonism
+  virtuland
+  papercut
+}
+
+type Nft {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  unique_id: String
+  category: ENUM_NFT_CATEGORY
+  status: ENUM_NFT_STATUS
+  item_type: ENUM_NFT_ITEM_TYPE
+  collections: ENUM_NFT_COLLECTIONS
+  deadline: Date
+  author_link: String
+  nft_link: String
+  bid_link: String
+  preview_image: UploadFile
+  title: String
+  price: Float
+  bid: Int
+  max_bid: Int
+  likes: Int
+  description: String
+  views: Int
+  priceover: Float
+  author: Author
+  showcase: Boolean
+  audio_url: String
+  published_at: DateTime
+  bids(sort: String, limit: Int, start: Int, where: JSON): [Bid]
+}
+
+type NftConnection {
+  values: [Nft]
+  groupBy: NftGroupBy
+  aggregate: NftAggregator
+}
+
+type NftAggregator {
+  count: Int
+  totalCount: Int
+  sum: NftAggregatorSum
+  avg: NftAggregatorAvg
+  min: NftAggregatorMin
+  max: NftAggregatorMax
+}
+
+type NftAggregatorSum {
+  price: Float
+  bid: Float
+  max_bid: Float
+  likes: Float
+  views: Float
+  priceover: Float
+}
+
+type NftAggregatorAvg {
+  price: Float
+  bid: Float
+  max_bid: Float
+  likes: Float
+  views: Float
+  priceover: Float
+}
+
+type NftAggregatorMin {
+  price: Float
+  bid: Float
+  max_bid: Float
+  likes: Float
+  views: Float
+  priceover: Float
+}
+
+type NftAggregatorMax {
+  price: Float
+  bid: Float
+  max_bid: Float
+  likes: Float
+  views: Float
+  priceover: Float
+}
+
+type NftGroupBy {
+  id: [NftConnectionId]
+  created_at: [NftConnectionCreated_at]
+  updated_at: [NftConnectionUpdated_at]
+  unique_id: [NftConnectionUnique_id]
+  category: [NftConnectionCategory]
+  status: [NftConnectionStatus]
+  item_type: [NftConnectionItem_type]
+  collections: [NftConnectionCollections]
+  deadline: [NftConnectionDeadline]
+  author_link: [NftConnectionAuthor_link]
+  nft_link: [NftConnectionNft_link]
+  bid_link: [NftConnectionBid_link]
+  preview_image: [NftConnectionPreview_image]
+  title: [NftConnectionTitle]
+  price: [NftConnectionPrice]
+  bid: [NftConnectionBid]
+  max_bid: [NftConnectionMax_bid]
+  likes: [NftConnectionLikes]
+  description: [NftConnectionDescription]
+  views: [NftConnectionViews]
+  priceover: [NftConnectionPriceover]
+  author: [NftConnectionAuthor]
+  showcase: [NftConnectionShowcase]
+  audio_url: [NftConnectionAudio_url]
+  published_at: [NftConnectionPublished_at]
+}
+
+type NftConnectionId {
+  key: ID
+  connection: NftConnection
+}
+
+type NftConnectionCreated_at {
+  key: DateTime
+  connection: NftConnection
+}
+
+type NftConnectionUpdated_at {
+  key: DateTime
+  connection: NftConnection
+}
+
+type NftConnectionUnique_id {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionCategory {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionStatus {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionItem_type {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionCollections {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionDeadline {
+  key: ID
+  connection: NftConnection
+}
+
+type NftConnectionAuthor_link {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionNft_link {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionBid_link {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionPreview_image {
+  key: ID
+  connection: NftConnection
+}
+
+type NftConnectionTitle {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionPrice {
+  key: Float
+  connection: NftConnection
+}
+
+type NftConnectionBid {
+  key: Int
+  connection: NftConnection
+}
+
+type NftConnectionMax_bid {
+  key: Int
+  connection: NftConnection
+}
+
+type NftConnectionLikes {
+  key: Int
+  connection: NftConnection
+}
+
+type NftConnectionDescription {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionViews {
+  key: Int
+  connection: NftConnection
+}
+
+type NftConnectionPriceover {
+  key: Float
+  connection: NftConnection
+}
+
+type NftConnectionAuthor {
+  key: ID
+  connection: NftConnection
+}
+
+type NftConnectionShowcase {
+  key: Boolean
+  connection: NftConnection
+}
+
+type NftConnectionAudio_url {
+  key: String
+  connection: NftConnection
+}
+
+type NftConnectionPublished_at {
+  key: DateTime
+  connection: NftConnection
+}
+
+input NftInput {
+  unique_id: String
+  category: ENUM_NFT_CATEGORY
+  status: ENUM_NFT_STATUS
+  item_type: ENUM_NFT_ITEM_TYPE
+  collections: ENUM_NFT_COLLECTIONS
+  deadline: Date
+  author_link: String
+  nft_link: String
+  bid_link: String
+  preview_image: ID
+  title: String
+  price: Float
+  bid: Int
+  max_bid: Int
+  likes: Int
+  description: String
+  views: Int
+  bids: [ID]
+  priceover: Float
+  author: ID
+  showcase: Boolean
+  audio_url: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editNftInput {
+  unique_id: String
+  category: ENUM_NFT_CATEGORY
+  status: ENUM_NFT_STATUS
+  item_type: ENUM_NFT_ITEM_TYPE
+  collections: ENUM_NFT_COLLECTIONS
+  deadline: Date
+  author_link: String
+  nft_link: String
+  bid_link: String
+  preview_image: ID
+  title: String
+  price: Float
+  bid: Int
+  max_bid: Int
+  likes: Int
+  description: String
+  views: Int
+  bids: [ID]
+  priceover: Float
+  author: ID
+  showcase: Boolean
+  audio_url: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createNftInput {
+  data: NftInput
+}
+
+type createNftPayload {
+  nft: Nft
+}
+
+input updateNftInput {
+  where: InputID
+  data: editNftInput
+}
+
+type updateNftPayload {
+  nft: Nft
+}
+
+input deleteNftInput {
+  where: InputID
+}
+
+type deleteNftPayload {
+  nft: Nft
+}
+
+type PostComments {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  published_at: DateTime
+  comments(sort: String, limit: Int, start: Int, where: JSON): [Comments]
+}
+
+type PostCommentsConnection {
+  values: [PostComments]
+  groupBy: PostCommentsGroupBy
+  aggregate: PostCommentsAggregator
+}
+
+type PostCommentsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type PostCommentsGroupBy {
+  id: [PostCommentsConnectionId]
+  created_at: [PostCommentsConnectionCreated_at]
+  updated_at: [PostCommentsConnectionUpdated_at]
+  published_at: [PostCommentsConnectionPublished_at]
+}
+
+type PostCommentsConnectionId {
+  key: ID
+  connection: PostCommentsConnection
+}
+
+type PostCommentsConnectionCreated_at {
+  key: DateTime
+  connection: PostCommentsConnection
+}
+
+type PostCommentsConnectionUpdated_at {
+  key: DateTime
+  connection: PostCommentsConnection
+}
+
+type PostCommentsConnectionPublished_at {
+  key: DateTime
+  connection: PostCommentsConnection
+}
+
+input PostCommentInput {
+  comments: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPostCommentInput {
+  comments: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPostCommentInput {
+  data: PostCommentInput
+}
+
+type createPostCommentPayload {
+  postComment: PostComments
+}
+
+input updatePostCommentInput {
+  where: InputID
+  data: editPostCommentInput
+}
+
+type updatePostCommentPayload {
+  postComment: PostComments
+}
+
+input deletePostCommentInput {
+  where: InputID
+}
+
+type deletePostCommentPayload {
+  postComment: PostComments
+}
+
+type PostTags {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  published_at: DateTime
+  tags(sort: String, limit: Int, start: Int, where: JSON): [Tags]
+}
+
+type PostTagsConnection {
+  values: [PostTags]
+  groupBy: PostTagsGroupBy
+  aggregate: PostTagsAggregator
+}
+
+type PostTagsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type PostTagsGroupBy {
+  id: [PostTagsConnectionId]
+  created_at: [PostTagsConnectionCreated_at]
+  updated_at: [PostTagsConnectionUpdated_at]
+  published_at: [PostTagsConnectionPublished_at]
+}
+
+type PostTagsConnectionId {
+  key: ID
+  connection: PostTagsConnection
+}
+
+type PostTagsConnectionCreated_at {
+  key: DateTime
+  connection: PostTagsConnection
+}
+
+type PostTagsConnectionUpdated_at {
+  key: DateTime
+  connection: PostTagsConnection
+}
+
+type PostTagsConnectionPublished_at {
+  key: DateTime
+  connection: PostTagsConnection
+}
+
+input PostTagInput {
+  tags: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPostTagInput {
+  tags: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPostTagInput {
+  data: PostTagInput
+}
+
+type createPostTagPayload {
+  postTag: PostTags
+}
+
+input updatePostTagInput {
+  where: InputID
+  data: editPostTagInput
+}
+
+type updatePostTagPayload {
+  postTag: PostTags
+}
+
+input deletePostTagInput {
+  where: InputID
+}
+
+type deletePostTagPayload {
+  postTag: PostTags
+}
+
+type Tags {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+  published_at: DateTime
+}
+
+type TagsConnection {
+  values: [Tags]
+  groupBy: TagsGroupBy
+  aggregate: TagsAggregator
+}
+
+type TagsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type TagsGroupBy {
+  id: [TagsConnectionId]
+  created_at: [TagsConnectionCreated_at]
+  updated_at: [TagsConnectionUpdated_at]
+  name: [TagsConnectionName]
+  published_at: [TagsConnectionPublished_at]
+}
+
+type TagsConnectionId {
+  key: ID
+  connection: TagsConnection
+}
+
+type TagsConnectionCreated_at {
+  key: DateTime
+  connection: TagsConnection
+}
+
+type TagsConnectionUpdated_at {
+  key: DateTime
+  connection: TagsConnection
+}
+
+type TagsConnectionName {
+  key: String
+  connection: TagsConnection
+}
+
+type TagsConnectionPublished_at {
+  key: DateTime
+  connection: TagsConnection
+}
+
+input TagInput {
+  name: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editTagInput {
+  name: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createTagInput {
+  data: TagInput
+}
+
+type createTagPayload {
+  tag: Tags
+}
+
+input updateTagInput {
+  where: InputID
+  data: editTagInput
+}
+
+type updateTagPayload {
+  tag: Tags
+}
+
+input deleteTagInput {
+  where: InputID
+}
+
+type deleteTagPayload {
+  tag: Tags
+}
+
+type I18NLocale {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+  code: String
+}
+
+input LocaleInput {
+  name: String
+  code: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editLocaleInput {
+  name: String
+  code: String
+  created_by: ID
+  updated_by: ID
+}
+
+type UploadFile {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileAggregator {
+  count: Int
+  totalCount: Int
+  sum: UploadFileAggregatorSum
+  avg: UploadFileAggregatorAvg
+  min: UploadFileAggregatorMin
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+  created_at: [UploadFileConnectionCreated_at]
+  updated_at: [UploadFileConnectionUpdated_at]
+  name: [UploadFileConnectionName]
+  alternativeText: [UploadFileConnectionAlternativeText]
+  caption: [UploadFileConnectionCaption]
+  width: [UploadFileConnectionWidth]
+  height: [UploadFileConnectionHeight]
+  formats: [UploadFileConnectionFormats]
+  hash: [UploadFileConnectionHash]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  previewUrl: [UploadFileConnectionPreviewUrl]
+  provider: [UploadFileConnectionProvider]
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+type UploadFileConnectionId {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+input FileInput {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input deleteFileInput {
+  where: InputID
+}
+
+type deleteFilePayload {
+  file: UploadFile
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+  created_at: [UsersPermissionsUserConnectionCreated_at]
+  updated_at: [UsersPermissionsUserConnectionUpdated_at]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | AuthorSales | AuthorSalesConnection | AuthorSalesAggregator | AuthorSalesAggregatorSum | AuthorSalesAggregatorAvg | AuthorSalesAggregatorMin | AuthorSalesAggregatorMax | AuthorSalesGroupBy | AuthorSalesConnectionId | AuthorSalesConnectionCreated_at | AuthorSalesConnectionUpdated_at | AuthorSalesConnectionSales | AuthorSalesConnectionVolume | AuthorSalesConnectionDaily_sales | AuthorSalesConnectionWeekly_sales | AuthorSalesConnectionFloor_price | AuthorSalesConnectionOwners | AuthorSalesConnectionAssets | AuthorSalesConnectionPublished_at | createAuthorSalePayload | updateAuthorSalePayload | deleteAuthorSalePayload | Author | AuthorConnection | AuthorAggregator | AuthorAggregatorSum | AuthorAggregatorAvg | AuthorAggregatorMin | AuthorAggregatorMax | AuthorGroupBy | AuthorConnectionId | AuthorConnectionCreated_at | AuthorConnectionUpdated_at | AuthorConnectionAvatar | AuthorConnectionUsername | AuthorConnectionBanner | AuthorConnectionSocial | AuthorConnectionWallet | AuthorConnectionFollowers | AuthorConnectionBid | AuthorConnectionAuthor_sale | AuthorConnectionAbout | AuthorConnectionUsers_permissions_user | AuthorConnectionPublished_at | createAuthorPayload | updateAuthorPayload | deleteAuthorPayload | Bid | BidConnection | BidAggregator | BidAggregatorSum | BidAggregatorAvg | BidAggregatorMin | BidAggregatorMax | BidGroupBy | BidConnectionId | BidConnectionCreated_at | BidConnectionUpdated_at | BidConnectionValue | BidConnectionNft | BidConnectionAuthor | BidConnectionPublished_at | createBidPayload | updateBidPayload | deleteBidPayload | BlogPost | BlogPostConnection | BlogPostAggregator | BlogPostAggregatorSum | BlogPostAggregatorAvg | BlogPostAggregatorMin | BlogPostAggregatorMax | BlogPostGroupBy | BlogPostConnectionId | BlogPostConnectionCreated_at | BlogPostConnectionUpdated_at | BlogPostConnectionTitle | BlogPostConnectionCover | BlogPostConnectionContent | BlogPostConnectionPost_tag | BlogPostConnectionAuthor | BlogPostConnectionPost_comment | BlogPostConnectionLikes | BlogPostConnectionPublished_at | createBlogPostPayload | updateBlogPostPayload | deleteBlogPostPayload | Comments | CommentsConnection | CommentsAggregator | CommentsGroupBy | CommentsConnectionId | CommentsConnectionCreated_at | CommentsConnectionUpdated_at | CommentsConnectionText | CommentsConnectionAuthor | CommentsConnectionIs_reply | CommentsConnectionPublished_at | createCommentPayload | updateCommentPayload | deleteCommentPayload | ContactForm | ContactFormConnection | ContactFormAggregator | ContactFormGroupBy | ContactFormConnectionId | ContactFormConnectionCreated_at | ContactFormConnectionUpdated_at | ContactFormConnectionName | ContactFormConnectionEmail | ContactFormConnectionPhone | ContactFormConnectionMessage | ContactFormConnectionPublished_at | createContactFormPayload | updateContactFormPayload | deleteContactFormPayload | HotCollection | HotCollectionConnection | HotCollectionAggregator | HotCollectionGroupBy | HotCollectionConnectionId | HotCollectionConnectionCreated_at | HotCollectionConnectionUpdated_at | HotCollectionConnectionUnique_id | HotCollectionConnectionBanner | HotCollectionConnectionAuthor | HotCollectionConnectionName | HotCollectionConnectionDescription | HotCollectionConnectionPublished_at | createHotCollectionPayload | updateHotCollectionPayload | deleteHotCollectionPayload | Nft | NftConnection | NftAggregator | NftAggregatorSum | NftAggregatorAvg | NftAggregatorMin | NftAggregatorMax | NftGroupBy | NftConnectionId | NftConnectionCreated_at | NftConnectionUpdated_at | NftConnectionUnique_id | NftConnectionCategory | NftConnectionStatus | NftConnectionItem_type | NftConnectionCollections | NftConnectionDeadline | NftConnectionAuthor_link | NftConnectionNft_link | NftConnectionBid_link | NftConnectionPreview_image | NftConnectionTitle | NftConnectionPrice | NftConnectionBid | NftConnectionMax_bid | NftConnectionLikes | NftConnectionDescription | NftConnectionViews | NftConnectionPriceover | NftConnectionAuthor | NftConnectionShowcase | NftConnectionAudio_url | NftConnectionPublished_at | createNftPayload | updateNftPayload | deleteNftPayload | PostComments | PostCommentsConnection | PostCommentsAggregator | PostCommentsGroupBy | PostCommentsConnectionId | PostCommentsConnectionCreated_at | PostCommentsConnectionUpdated_at | PostCommentsConnectionPublished_at | createPostCommentPayload | updatePostCommentPayload | deletePostCommentPayload | PostTags | PostTagsConnection | PostTagsAggregator | PostTagsGroupBy | PostTagsConnectionId | PostTagsConnectionCreated_at | PostTagsConnectionUpdated_at | PostTagsConnectionPublished_at | createPostTagPayload | updatePostTagPayload | deletePostTagPayload | Tags | TagsConnection | TagsAggregator | TagsGroupBy | TagsConnectionId | TagsConnectionCreated_at | TagsConnectionUpdated_at | TagsConnectionName | TagsConnectionPublished_at | createTagPayload | updateTagPayload | deleteTagPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
+
+input InputID {
+  id: ID!
+}
+
+enum PublicationState {
+  LIVE
+  PREVIEW
+}
+
+type AdminUser {
+  id: ID!
+  username: String
+  firstname: String!
+  lastname: String!
+}
+
+type Query {
+  authorSale(id: ID!, publicationState: PublicationState): AuthorSales
+  authorSales(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [AuthorSales]
+  authorSalesConnection(sort: String, limit: Int, start: Int, where: JSON): AuthorSalesConnection
+  author(id: ID!, publicationState: PublicationState): Author
+  authors(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Author]
+  authorsConnection(sort: String, limit: Int, start: Int, where: JSON): AuthorConnection
+  bid(id: ID!, publicationState: PublicationState): Bid
+  bids(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Bid]
+  bidsConnection(sort: String, limit: Int, start: Int, where: JSON): BidConnection
+  blogPost(id: ID!, publicationState: PublicationState): BlogPost
+  blogPosts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [BlogPost]
+  blogPostsConnection(sort: String, limit: Int, start: Int, where: JSON): BlogPostConnection
+  comment(id: ID!, publicationState: PublicationState): Comments
+  comments(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Comments]
+  commentsConnection(sort: String, limit: Int, start: Int, where: JSON): CommentsConnection
+  contactForm(id: ID!, publicationState: PublicationState): ContactForm
+  contactForms(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [ContactForm]
+  contactFormsConnection(sort: String, limit: Int, start: Int, where: JSON): ContactFormConnection
+  hotCollection(id: ID!, publicationState: PublicationState): HotCollection
+  hotCollections(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [HotCollection]
+  hotCollectionsConnection(sort: String, limit: Int, start: Int, where: JSON): HotCollectionConnection
+  nft(id: ID!, publicationState: PublicationState): Nft
+  nfts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Nft]
+  nftsConnection(sort: String, limit: Int, start: Int, where: JSON): NftConnection
+  postComment(id: ID!, publicationState: PublicationState): PostComments
+  postComments(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [PostComments]
+  postCommentsConnection(sort: String, limit: Int, start: Int, where: JSON): PostCommentsConnection
+  postTag(id: ID!, publicationState: PublicationState): PostTags
+  postTags(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [PostTags]
+  postTagsConnection(sort: String, limit: Int, start: Int, where: JSON): PostTagsConnection
+  tag(id: ID!, publicationState: PublicationState): Tags
+  tags(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Tags]
+  tagsConnection(sort: String, limit: Int, start: Int, where: JSON): TagsConnection
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  me: UsersPermissionsMe
+}
+
+type Mutation {
+  createAuthorSale(input: createAuthorSaleInput): createAuthorSalePayload
+  updateAuthorSale(input: updateAuthorSaleInput): updateAuthorSalePayload
+  deleteAuthorSale(input: deleteAuthorSaleInput): deleteAuthorSalePayload
+  createAuthor(input: createAuthorInput): createAuthorPayload
+  updateAuthor(input: updateAuthorInput): updateAuthorPayload
+  deleteAuthor(input: deleteAuthorInput): deleteAuthorPayload
+  createBid(input: createBidInput): createBidPayload
+  updateBid(input: updateBidInput): updateBidPayload
+  deleteBid(input: deleteBidInput): deleteBidPayload
+  createBlogPost(input: createBlogPostInput): createBlogPostPayload
+  updateBlogPost(input: updateBlogPostInput): updateBlogPostPayload
+  deleteBlogPost(input: deleteBlogPostInput): deleteBlogPostPayload
+  createComment(input: createCommentInput): createCommentPayload
+  updateComment(input: updateCommentInput): updateCommentPayload
+  deleteComment(input: deleteCommentInput): deleteCommentPayload
+  createContactForm(input: createContactFormInput): createContactFormPayload
+  updateContactForm(input: updateContactFormInput): updateContactFormPayload
+  deleteContactForm(input: deleteContactFormInput): deleteContactFormPayload
+  createHotCollection(input: createHotCollectionInput): createHotCollectionPayload
+  updateHotCollection(input: updateHotCollectionInput): updateHotCollectionPayload
+  deleteHotCollection(input: deleteHotCollectionInput): deleteHotCollectionPayload
+  createNft(input: createNftInput): createNftPayload
+  updateNft(input: updateNftInput): updateNftPayload
+  deleteNft(input: deleteNftInput): deleteNftPayload
+  createPostComment(input: createPostCommentInput): createPostCommentPayload
+  updatePostComment(input: updatePostCommentInput): updatePostCommentPayload
+  deletePostComment(input: deletePostCommentInput): deletePostCommentPayload
+  createPostTag(input: createPostTagInput): createPostTagPayload
+  updatePostTag(input: updatePostTagInput): updatePostTagPayload
+  deletePostTag(input: deletePostTagInput): deletePostTagPayload
+  createTag(input: createTagInput): createTagPayload
+  updateTag(input: updateTagInput): updateTagPayload
+  deleteTag(input: deleteTagInput): deleteTagPayload
+
+  """Delete one file"""
+  deleteFile(input: deleteFileInput): deleteFilePayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, field: String, source: String, info: FileInfoInput, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+  updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+  forgotPassword(email: String!): UserPermissionsPasswordPayload
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""A time string with format: HH:mm:ss.SSS"""
+scalar Time
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
