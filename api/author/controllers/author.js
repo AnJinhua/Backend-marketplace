@@ -12,10 +12,14 @@ module.exports = {
         
         const { id } = ctx.query;
         const sanitized = sanitizeEntity(entity, { model: strapi.models.author });
-        const filtered = sanitized.filter(author => author.author_sale);
+        // const filtered = sanitized.filter(author => author.author_sale);
         console.log(id)
+        // const sorted = id === undefined ? 
+        //     filtered.sort((a, b) => (a.author_sale.sales < b.author_sale.sales) ? 1 : -1) 
+        //     : 
+        //     sanitized;
         const sorted = id === undefined ? 
-            filtered.sort((a, b) => (a.author_sale.sales < b.author_sale.sales) ? 1 : -1) 
+            sanitized 
             : 
             sanitized;
 
